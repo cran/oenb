@@ -15,6 +15,15 @@
 <title>Tutorial / vignette for the oenb R package</title>
 
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
@@ -35,7 +44,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -102,6 +111,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -307,47 +317,47 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;oenb&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;oenb&quot;</span>) </a></code></pre></div>
 <div id="development-version" class="section level3">
 <h3>Development version</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;franzmohr/oenb&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb2-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;franzmohr/oenb&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="usage" class="section level2">
 <h2>Usage</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;oenb&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(<span class="st">&quot;oenb&quot;</span>)</a></code></pre></div>
 <div id="table-of-contents" class="section level3">
 <h3>Table of contents</h3>
 <p>A table of available data sets can be obtained with the function <code>oenb_toc</code>. Its output contains the ID of the data set with a short description.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">toc &lt;-<span class="st"> </span><span class="kw">oenb_toc</span>()</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">head</span>(toc)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">toc &lt;-<span class="st"> </span><span class="kw">oenb_toc</span>()</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">head</span>(toc)</a></code></pre></div>
 </div>
 <div id="dataset-overview" class="section level3">
 <h3>Dataset overview</h3>
 <p>Each data set contains a series of indicators. The function <code>oenb_dataset</code> can be used to obtain a table of available series for a given data set. Its output contains the position code of a series and a short description.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">overview &lt;-<span class="st"> </span><span class="kw">oenb_dataset</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">head</span>(overview)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">overview &lt;-<span class="st"> </span><span class="kw">oenb_dataset</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">head</span>(overview)</a></code></pre></div>
 </div>
 <div id="attributes-of-a-series" class="section level3">
 <h3>Attributes of a series</h3>
 <p>Many series are available in different forms. The function <code>oenb_attributes</code> obtains a table of available query specifications of a given series.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">attrib &lt;-<span class="st"> </span><span class="kw">oenb_attributes</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">attrib</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">attrib &lt;-<span class="st"> </span><span class="kw">oenb_attributes</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2">attrib</a></code></pre></div>
 <p>Furthermore, series are available in different frequencies. The function <code>oenb_frequency</code> can be used to obtain the available frequencies of a given series and the periods, for which data are available.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">freq &lt;-<span class="st"> </span><span class="kw">oenb_frequency</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">freq</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">freq &lt;-<span class="st"> </span><span class="kw">oenb_frequency</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2">freq</a></code></pre></div>
 </div>
 <div id="data-download" class="section level3">
 <h3>Data download</h3>
 <p>Series of a data set can be downloaded with the <code>oenb_data</code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">series &lt;-<span class="st"> </span><span class="kw">oenb_data</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>, <span class="dt">attr =</span> <span class="kw">c</span>(<span class="st">&quot;dval3&quot;</span> =<span class="st"> &quot;AT&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">series &lt;-<span class="st"> </span><span class="kw">oenb_data</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>, <span class="dt">attr =</span> <span class="kw">c</span>(<span class="st">&quot;dval3&quot;</span> =<span class="st"> &quot;AT&quot;</span>))</a></code></pre></div>
 </div>
 <div id="metadata" class="section level3">
 <h3>Metadata</h3>
 <p>Metadata on a specific series can be obtained with the function <code>oenb_metadata</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">meta &lt;-<span class="st"> </span><span class="kw">oenb_metadata</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">meta</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">meta &lt;-<span class="st"> </span><span class="kw">oenb_metadata</span>(<span class="dt">id =</span> <span class="st">&quot;11&quot;</span>, <span class="dt">pos =</span> <span class="st">&quot;VDBFKBSC217000&quot;</span>)</a>
+<a class="sourceLine" id="cb9-2" title="2">meta</a></code></pre></div>
 </div>
 </div>
 
