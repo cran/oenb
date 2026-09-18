@@ -7,6 +7,7 @@
 #' @inheritParams oenb_dataset
 #'
 #' @return A data frame containing available frequencies and periods of a series.
+#' \code{NULL} is returned if the web service is not available.
 #'
 #' @examples
 #' \donttest{
@@ -16,21 +17,36 @@
 #'
 #' @export
 oenb_frequency <- function(id, pos, lang = "EN") {
-  if (!lang %in% c("DE", "EN")) {"Specified language is not supported."}
+  oenb_check_lang(lang)
 
   url <- paste("https://www.oenb.at/isadataservice/datafrequency?lang=", lang, sep = "")
-  url <- paste(url, "&hierid=", id, sep = "")
-  url <- paste(url, "&pos=", pos, sep = "")
+  url <- paste(url, "&hierid=", oenb_encode(id), sep = "")
+  url <- paste(url, "&pos=", oenb_encode(pos), sep = "")
 
-  xml <- XML::xmlParse(readLines(url))
+  xml <- oenb_fetch(url)
+  if (is.null(xml)) {
+    return(NULL)
+  }
 
   freq <- XML::xpathSApply(xml, "//periods", XML::xmlGetAttr, "frequency")
   avail <- XML::getNodeSet(xml, "//periods/available", fun = XML::xmlToList)
   avail <- unlist(avail)
+  if (length(freq) == 0 || length(avail) != length(freq)) {
+    message("No frequencies were found for position \"", pos,
+            "\" in data set \"", id, "\".")
+    return(oenb_empty(c("frequency", "available_period")))
+  }
 
   result <- data.frame("frequency" = freq,
                        "available_period" = avail,
                        stringsAsFactors = FALSE)
+
+  # This function exists to show which frequencies can be chosen when querying
+  # the series. The service reports a frequency once per combination of the
+  # attributes, so the same choice arrives many times over. Each choice is
+  # listed once, as oenb_attributes lists the values of an attribute once.
+  result <- as.data.frame(dplyr::distinct(result))
+  row.names(result) <- NULL
 
   return(result)
 }
